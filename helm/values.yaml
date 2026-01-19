@@ -20,6 +20,6 @@ route:
 
   # Optional weighted routing
   weights:
-    blue: 0
-    green: 100
+    blue: 100
+    green: 0
 
