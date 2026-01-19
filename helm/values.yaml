@@ -1,0 +1,25 @@
+app:
+  name: demo
+  image: quay.io/openshift/origin-hello-openshift
+  replicas: 2
+  port: 8080
+
+blue:
+  enabled: true
+  response: "Hello from Helm BLUE (v1)"
+
+green:
+  enabled: true
+  response: "Hello from helm GREEN (v2)"
+
+route:
+  enabled: true
+
+  # ACTIVE COLOR (blue OR green)
+  activeService: blue
+
+  # Optional weighted routing
+  weights:
+    blue: 0
+    green: 100
+

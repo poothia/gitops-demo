@@ -1,0 +1,27 @@
+{{- if .Values.blue.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-blue
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        version: blue
+    spec:
+      containers:
+      - name: app
+        image: {{ .Values.app.image }}
+        env:
+        - name: RESPONSE
+          value: {{ .Values.blue.response | quote }}
+        ports:
+        - containerPort: {{ .Values.app.port }}
+{{- end }}
+

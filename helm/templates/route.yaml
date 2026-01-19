@@ -1,0 +1,22 @@
+{{- if .Values.route.enabled }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  to:
+    kind: Service
+    name: {{ .Values.app.name }}-{{ .Values.route.activeService }}
+    weight: {{ index .Values.route.weights .Values.route.activeService }}
+  alternateBackends:
+  {{- range $svc, $weight := .Values.route.weights }}
+  {{- if ne $svc $.Values.route.activeService }}
+  - kind: Service
+    name: {{ $.Values.app.name }}-{{ $svc }}
+    weight: {{ $weight }}
+  {{- end }}
+  {{- end }}
+  port:
+    targetPort: 8080
+{{- end }}
+
