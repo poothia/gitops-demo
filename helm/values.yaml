@@ -6,11 +6,11 @@ app:
 
 blue:
   enabled: true
-  response: "Hello from Helm BLUE (v1)"
+  response: "Hello from gitops BLUE (v1)"
 
 green:
   enabled: true
-  response: "Hello from helm GREEN (v2)"
+  response: "Hello from gitops GREEN (v2)"
 
 route:
   enabled: true
